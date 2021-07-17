@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"/>
+<meta name="description" content="A simple block diagram editor that includes context menus for changing shapes and colors."/> 
+<!-- Copyright 1998-2021 by Northwoods Software Corporation. -->
+<title>Simple Block Editor</title>
+<!-- use go-debug.js when developing and go.js when deploying -->
+</head>
+
+<body>
+  <!-- This top nav is not part of the sample code -->
+  <script src="https://unpkg.com/gojs/release/go-debug.js"></script>    
+  <script src="../extensions/Figures.js"></script>
+  <script src="../extensions/DrawCommandHandler.js"></script>
+
+<div id="sample">
+  <div id="myDiagramDiv" style="border: solid 1px black; width:100%; height:600px"></div>
+  <p>
+    Double-click in the background to create a new node.
+    Create groups by selecting nodes and invoking Ctrl-G; Ctrl-Shift-G to ungroup a selected group.
+    A selected node will have four orange triangles that when clicked will automatically copy the node and link to it.
+    Use the context menu to change the shape, color, thickness, and dashed-ness.
+  </p>
+  <p>
+    Links can be drawn by dragging from the side of each node.
+    A selected link can be reconnected by dragging an end handle.
+    Use the context menu to change the color, thickness, dashed-ness, and which side the link should connect with.
+    Press the F2 key to start editing the label of a selected link.
+  </p>
+  <div id="buttons">
+    <button id="loadModel" onclick="load()">Load</button>
+    <button id="saveModel" onclick="save()">Save</button>
+  </div>
+  <textarea id="mySavedModel" style="width:100%;height:300px">
+{ "class": "GraphLinksModel",
+  "nodeDataArray": [
+{"key":1, "loc":"0 0", "text":"Alpha", "details":"some information about Alpha and its importance"},
+{"key":2, "loc":"170 0", "text":"Beta", "color":"blue", "thickness":2, "figure":"Procedure"},
+{"key":3, "loc":"0 100", "text":"Gamma", "color":"green", "figure":"Cylinder1"},
+{"key":4, "loc":"80 180", "text":"Delta", "color":"red", "figure":"Terminator", "size":"80 40"},
+{"key":5, "loc":"350 -50", "text":"Zeta", "group":7, "color":"blue", "figure":"CreateRequest"},
+{"key":6, "loc":"350 50", "text":"Eta", "group":7, "figure":"Document", "fill":"lightyellow"},
+{"key":7, "isGroup":true, "text":"Theta", "color":"green", "fill":"lightgreen"},
+{"key":8, "loc":"520 50", "text":"Iota", "fill":"pink"}
+ ],
+  "linkDataArray": [
+{"from":1, "to":2, "dash":[ 6,3 ], "thickness":4},
+{"from":1, "to":3, "dash":[ 2,4 ], "color":"green", "text":"label"},
+{"from":3, "to":4, "color":"red", "text":"a red label", "fromSpot":"RightSide"},
+{"from":2, "to":1},
+{"from":5, "to":6, "text":"in a group"},
+{"from":2, "to":7},
+{"from":6, "to":8, "dir":0},
+{"from":6, "to":8, "dir":1},
+{"from":6, "to":8, "dir":2}
+ ]}
+  </textarea>
+</div>
+    <!-- * * * * * * * * * * * * * -->
+    <!--  End of GoJS sample code  -->
+  </div>
+  <script src="blockchart.js"></script>
+</body>
+</html>
